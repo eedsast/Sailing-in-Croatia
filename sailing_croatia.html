@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sailing Croatia - Complete Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --navy: #0f1929;
+    --navy-light: #1a2942;
+    --navy-lighter: #253349;
+    --teal: #00d9ff;
+    --teal-dark: #00a8cc;
+    --gold: #d4a574;
+    --text: #e0e0e0;
+    --text-light: #a0a0a0;
+    --text-muted: #666666;
+    --border: #2a3f5f;
+    --white: #ffffff;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--navy);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* Navigation */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: rgba(15, 25, 41, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .nav-brand em {
+    color: var(--teal);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-links a {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover {
+    color: var(--teal);
+  }
+
+  /* Hero Section */
+  .hero {
+    margin-top: 80px;
+    min-height: 500px;
+    background: linear-gradient(135deg, #1a2942 0%, #253349 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+
+  .hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .hero-content h1 em {
+    color: var(--teal);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .hero-content p {
+    font-size: 1.15rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    color: var(--text-light);
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: var(--teal);
+    color: var(--navy);
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+
+  .cta-button:hover {
+    background: var(--teal-dark);
+    transform: translateY(-2px);
+  }
+
+  /* Container */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section {
+    padding: 4rem 0;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--white);
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+  }
+
+  /* Weather Section */
+  .weather-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .weather-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s;
+  }
+
+  .weather-card:hover {
+    border-color: var(--teal);
+    background: rgba(0, 217, 255, 0.05);
+  }
+
+  .weather-month {
+    font-size: 0.85rem;
+    color: var(--teal);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .weather-temp {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0.5rem 0;
+    color: var(--gold);
+  }
+
+  .weather-desc {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  /* Route Selector Tabs */
+  .route-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .route-tab {
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: 2px solid var(--border);
+    color: var(--text-light);
+    font-size: 0.95rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    transition: all 0.3s;
+    font-weight: 600;
+  }
+
+  .route-tab:hover {
+    border-color: var(--teal);
+    color: var(--teal);
+  }
+
+  .route-tab.active {
+    border-color: var(--teal);
+    background: rgba(0, 217, 255, 0.1);
+    color: var(--teal);
+  }
+
+  /* Route Content */
+  .route-content {
+    display: none;
+  }
+
+  .route-content.active {
+    display: block;
+  }
+
+  .route-header {
+    background: rgba(0, 217, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .route-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--white);
+  }
+
+  .route-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    font-size: 0.95rem;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .meta-item strong {
+    color: var(--gold);
+    font-size: 1.3rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .route-description {
+    font-size: 1rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-top: 1.5rem;
+  }
+
+  /* Port Links */
+  .port-section {
+    background: rgba(0, 217, 255, 0.05);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0.75rem;
+    border: 1px solid var(--border);
+  }
+
+  .port-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--teal);
+  }
+
+  .port-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .port-link {
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.3s;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+
+  .port-link:hover {
+    border-color: var(--teal);
+    color: var(--teal);
+    background: rgba(0, 217, 255, 0.1);
+  }
+
+  .port-link-title {
+    font-weight: 600;
+    margin-bottom: 0.1rem;
+  }
+
+  .port-link-type {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Itinerary Table */
+  .itinerary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  .itinerary-table thead {
+    background: rgba(0, 217, 255, 0.1);
+    border-bottom: 2px solid var(--teal);
+  }
+
+  .itinerary-table th {
+    padding: 1rem;
+    text-align: left;
+    color: var(--teal);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .itinerary-table td {
+    padding: 1.25rem 1rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+
+  .itinerary-table tbody tr:hover {
+    background: rgba(0, 217, 255, 0.02);
+  }
+
+  .day-num {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .route-cell {
+    color: var(--text-light);
+  }
+
+  .distance-cell {
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .activity-cell {
+    color: var(--text-light);
+  }
+
+  .time-cell {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  .map-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .map-btn {
+    padding: 0.5rem 0.75rem;
+    background: rgba(0, 217, 255, 0.1);
+    border: 1px solid var(--teal);
+    color: var(--teal);
+    text-decoration: none;
+    border-radius: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-block;
+  }
+
+  .map-btn:hover {
+    background: rgba(0, 217, 255, 0.2);
+    transform: translateY(-1px);
+  }
+
+  .map-btn.navionics {
+    background: rgba(255, 193, 7, 0.1);
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .map-btn.navionics:hover {
+    background: rgba(255, 193, 7, 0.2);
+  }
+
+  /* Tips Section */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .tip-card {
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s;
+  }
+
+  .tip-card:hover {
+    border-color: var(--teal);
+    background: rgba(0, 217, 255, 0.05);
+  }
+
+  .tip-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .tip-title {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+    color: var(--white);
+  }
+
+  .tip-text {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  /* Resources Section */
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .resource-card {
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s;
+  }
+
+  .resource-card:hover {
+    border-color: var(--teal);
+    background: rgba(0, 217, 255, 0.05);
+  }
+
+  .resource-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .resource-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--white);
+  }
+
+  .resource-desc {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+  }
+
+  .resource-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .resource-link {
+    padding: 0.75rem;
+    background: rgba(0, 217, 255, 0.05);
+    color: var(--teal);
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s;
+    border: 1px solid var(--border);
+  }
+
+  .resource-link:hover {
+    background: rgba(0, 217, 255, 0.15);
+    border-color: var(--teal);
+  }
+
+  /* Footer */
+  footer {
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--text);
+    padding: 3rem 2rem;
+    margin-top: 4rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer-section h4 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--teal);
+  }
+
+  .footer-section a {
+    display: block;
+    color: var(--text-light);
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s;
+  }
+
+  .footer-section a:hover {
+    color: var(--teal);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 3rem 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    nav { padding: 0.75rem 1rem; }
+    .nav-links { display: none; }
+    .hero { margin-top: 60px; }
+    .section-title { font-size: 2rem; }
+    .route-tabs { gap: 0.5rem; }
+    .route-tab { padding: 0.5rem 1rem; font-size: 0.8rem; }
+    .itinerary-table { font-size: 0.8rem; }
+    .itinerary-table th, .itinerary-table td { padding: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-container">
+    <div class="nav-brand">⛵ Sailing <em>Croatia</em></div>
+    <div class="nav-links">
+      <a href="#routes">Routes</a>
+      <a href="#weather">Weather</a>
+      <a href="#tips">Tips</a>
+      <a href="#resources">Resources</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Sailing <em>Croatia</em></h1>
+    <p>Explore three spectacular 7-day routes through pristine islands, UNESCO heritage sites, and untouched archipelagos in the Adriatic.</p>
+    <a href="#routes" class="cta-button">Explore Routes</a>
+  </div>
+</section>
+
+<!-- Weather Section -->
+<section id="weather" class="section">
+  <div class="container">
+    <h2 class="section-title">Best Time to Sail</h2>
+    <p class="section-subtitle">The Croatian Adriatic offers excellent sailing conditions from April through October, with peak season June–September.</p>
+    
+    <div class="weather-grid">
+      <div class="weather-card">
+        <div class="weather-month">April – May</div>
+        <div class="weather-temp">18–24°C</div>
+        <div class="weather-desc">Mild temperatures, fewer crowds. Sea still cool at 16°C. Variable winds and occasional rain. Perfect for experienced sailors.</div>
+      </div>
+      <div class="weather-card">
+        <div class="weather-month">June</div>
+        <div class="weather-temp">24–28°C</div>
+        <div class="weather-desc">Excellent conditions. Reliable Maestral winds. Sea reaches 22°C. Manageable crowds. Best overall sailing month.</div>
+      </div>
+      <div class="weather-card">
+        <div class="weather-month">July – August</div>
+        <div class="weather-temp">29–34°C</div>
+        <div class="weather-desc">Peak season. Sea 25°C+. Consistent afternoon Maestral (15–20 kn). Busy marinas. Vibrant atmosphere.</div>
+      </div>
+      <div class="weather-card">
+        <div class="weather-month">September – October</div>
+        <div class="weather-temp">22–27°C</div>
+        <div class="weather-desc">Golden season. Thinning crowds. Sea remains warm (22–24°C). Growing Bura risk. Excellent value.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Routes Section -->
+<section id="routes" class="section">
+  <div class="container">
+    <h2 class="section-title">Three Epic Routes</h2>
+    <p class="section-subtitle">Select a route to view the complete 7-day itinerary with daily details, maps, and port information.</p>
+
+    <!-- Route Tabs -->
+    <div class="route-tabs">
+      <button class="route-tab active" onclick="showRoute('route-a')">
+        Route A: Kaštela to Vis (~185 nm, 7 days)
+      </button>
+      <button class="route-tab" onclick="showRoute('route-b')">
+        Route B: Ploče to Lastovo (~200 nm, 7 days)
+      </button>
+      <button class="route-tab" onclick="showRoute('route-c')">
+        Route C: Šibenik & Kornati (~150 nm, 7 days)
+      </button>
+    </div>
+
+    <!-- ROUTE A -->
+    <div id="route-a" class="route-content active">
+      <div class="route-header">
+        <h3>Route A: Kaštela to Vis & Back</h3>
+        <div class="route-meta">
+          <div class="meta-item">
+            <strong>185</strong>
+            <span>nautical miles</span>
+          </div>
+          <div class="meta-item">
+            <strong>7</strong>
+            <span>days</span>
+          </div>
+          <div class="meta-item">
+            <strong>Intermediate</strong>
+            <span>difficulty</span>
+          </div>
+        </div>
+        <div class="route-description">
+          Spectacular circuit through central Dalmatian islands — Brač, Hvar and Vis. Explore baroque towns, UNESCO heritage, vibrant nightlife and secluded coves. Pakleni otoci archipelago is unmissable. This route combines the most accessible and popular sailing destinations in Croatia with genuine cultural experiences.
+        </div>
+      </div>
+
+      <div class="port-section">
+        <h3>📍 Ports & Tourism - Route A</h3>
+        <div class="port-grid">
+          <a href="https://marina-kastela.hr/" target="_blank" class="port-link">
+            <div class="port-link-title">Kaštela</div>
+            <div class="port-link-type">Marina Kaštela</div>
+          </a>
+          <a href="https://www.visitbrac.com/" target="_blank" class="port-link">
+            <div class="port-link-title">Brač Island</div>
+            <div class="port-link-type">Official Page</div>
+          </a>
+          <a href="https://www.visit-hvar.com/" target="_blank" class="port-link">
+            <div class="port-link-title">Visit Hvar</div>
+            <div class="port-link-type">Travel Guide</div>
+          </a>
+          <a href="https://en.wikipedia.org/wiki/Vis_(island)" target="_blank" class="port-link">
+            <div class="port-link-title">Vis Island</div>
+            <div class="port-link-type">Information</div>
+          </a>
+          <a href="https://www.google.com/search?q=pakleni+islands+images&oq=&gs_lcrp=EgZjaHJvbWUqDAgAECMYJxjqAhiMBDIMCAAQIxgnGOoCGIwEMgwIARAjGCcY6gIYjAQyDAgCECMYJxjqAhiMBDIMCAMQIxgnGOoCGIwEMgwIBBAjGCcY6gIYjAQyDAgFECMYJxjqAhiMBDIGCAYQRRhA0gEJMjIwNjZqMWo5qAIGsAIB8QWYmdtw0Cd3-w&sourceid=chrome&ie=UTF-8" target="_blank" class="port-link">
+            <div class="port-link-title">Pakleni Islands</div>
+            <div class="port-link-type">Images</div>
+          </a>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1.5rem; font-size: 1.3rem; color: var(--white);">7-Day Itinerary</h3>
+      <table class="itinerary-table">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Route</th>
+            <th>Distance</th>
+            <th>Time</th>
+            <th>Activity</th>
+            <th>Maps</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="day-num">1</span></td>
+            <td class="route-cell">Kaštela → Milna (Brač)</td>
+            <td class="distance-cell">22 nm</td>
+            <td class="time-cell">3-4 hrs</td>
+            <td class="activity-cell">First crossing, swimming, ACI Marina</td>
+            <td>
+              <div class="map-buttons">
+                <a href="https://www.google.com/maps/dir/Kastela/Milna+Brac" target="_blank" class="map-btn">🗺️ Map</a>
+                <a href="https://webapp.navionics.com/?lang=en#boating@9&key=m%7DbgH%7DscS" target="_blank" class="map-btn navionics">📊 Navionics</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="day-num">2</span></td>
+            <td class="route-cell">Milna → Jelsa (Hvar)</td>
+            <td class="distance-cell">28 nm</td>
+            <td class="time-cell">4-5 hrs</td>
+            <td class="activity-cell">Beach exploration, lavender fields</td>
+            <td>
+              <div class="map-buttons">
+                <a href="https://www.google.com/maps/dir/Milna+Brac/Jelsa+Hvar" target="_blank" class="map-btn">🗺️ Map</a>
+                <a href="https://webapp.navionics.com/?lang=en#boating@9&key=m%7DbgH%7DscS" target="_blank" class="map-btn navionics">📊 Navionics</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="day-num">3</span></td>
+            <td class="route-cell">Jelsa → Vrboska → Stari Grad</td>
+            <td class="distance-cell">12 nm</td>
+            <td class="time-cell">2 hrs</td>
+            <td class="activity-cell">UNESCO site, historic town, Venice of Hvar</td>
+            <td>
+              <div class="map-buttons">
+                <a href="https://www.google.com/maps/dir/Jelsa/Stari+Grad+Hvar" target="_blank" class="map-btn">🗺️ Map</a>
+                <a href="https://webapp.navionics.com/?lang=en#boating@9&key=m%7DbgH%7DscS" target="_blank" class="map-btn navionics">📊 Navionics</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="day-num">4</span></td>
+            <td class="route-cell">Stari Grad → Hvar Town</td>
+            <td class="distance-cell">18 nm</td>
+            <td class="time-cell">3 hrs</td>
+            <td class="activity-cell">Glamorous port, fortress, nightlife</td>
+            <td>
+              <div class="map-buttons">
+                <a href="https://www.google.com/maps/dir/Stari+Grad+Hvar/Hvar+Town" target="_blank" class="map-btn">🗺️ Map</a>
+                <a href="https://webapp.navionics.com/?lang=en#boating@9&key=m%7DbgH%7DscS" target="_blank" class="map-btn navionics">📊 Navionics</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="day-num">5</span></td>
+            <td class="route-cell">Hvar → Pakleni Islands → Vis</td>
+            <td class="distance-cell">32 nm</td>
+            <td class="time-cell">5-6 hrs</td>
+            <td class="activity-cell">Snorkelling, crystal bays, remote island</td>
+            <td>
+              <div class="map-buttons">
+                <a href="https://www.google.com/maps/dir/Hvar/Vis+Croatia" target="_blank" class="map-btn">🗺️ Map</a>
+                <a href="https://webapp.navionics.com/?lang=en#boating@9&key=m%7DbgH%7DscS" target="_blank" class="map-btn navionics">📊 Navionics</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="day-num">6</span></td>
+            <td class="route-cell">Vis → Komiža</td>
+            <td class="distance-cell">10 nm</td>
+            <td class="time-cell">1.5 hrs</td>
+            <td class="activity-cell">Fishing village, Blue Cave trip, best seafood</td>
+            <td>
+              <div class="map-buttons">
+                <a href="https://www.google.com/maps/dir/Vis/Komiza+Vis" target="_blank" class="map-btn">🗺️ Map</a>
+                <a href="https://webapp.navionics.com/?lang=en#boating@9&key=m%7DbgH%7DscS" target="_blank" class="map-btn navionics">📊 Navionics</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="day-num">7</span></td>
+            <td class="route-cell">Komiža → Kaštela</td>
+            <td class="distance-cell">63 nm</td>
+            <td class="time-cell">9-10 hrs</td>
+            <td class="activity-cell">Long passage, early start, celebration dinner</td>
+            <td>
+              <div class="map-buttons">
+                <a href="https://www.google.com/maps/dir/Komiza/Kastela" target="_blank" class="map-btn">🗺️ Map</a>
+                <a href="https://webapp.navionics.com/?lang=en#boating@9&key=m%7DbgH%7DscS" target="_blank" class="map-btn navionics">📊 Navionics</a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ROUTE B -->
+    <div id="route-b" class="route-content">
+      <div class="route-header">
+        <h3>Route B: Ploče to Lastovo & Back</h3>
+        <div class="route-meta">
+          <div class="meta-item">
+            <strong>200</strong>
+            <span>nautical miles</span>
+          </div>
+          <div class="meta-item">
+            <strong>7</strong>
+            <span>days</span>
+          </div>
+          <div class="meta-item">
+            <strong>Intermediate+</strong>
+            <span>difficulty</span>
+          </div>
+        </div>
+        <div class="route-description">
+          Southern Dalmatian islands from Marco Polo's legendary birthplace in Korčula to the wild solitude of Lastovo Nature Park. This route combines cultural riches, isolated bays, UNESCO National Park and some of the least-visited sailing grounds in the entire Adriatic. More adventurous and less crowded than Route A.
+        </div>
+      </div>
+
+      <div class="port-section">
+        <h3>📍 Ports & Tourism - Route B</h3>
+        <div class="port-grid">
+          <a href="https://plocesailing.com/" target="_blank" class="port-link">
+            <div class="port-link-title">Ploče</div>
+            <div class="port-link-type">Sailing Info</div>
+          </a>
+          <a href="https://visitkorcula.eu/en/visit-korcula-english/" target="_blank" class="port-link">
+            <div class="port-link-title">Korčula Tourism</div>
+            <div class="port-link-type">Visit Guide</div>
+          </a>
+          <a href="https://visitkorcula.eu/en/visit-korcula-english/" target="_blank" class="port-link">
+            <div class="port-link-title">Visit Korčula</div>
+            <div class="port-link-type">Travel Guide</div>
+          </a>
+          <a href="https://www.mljet.hr/?l=en" target="_blank" class="port-link">
+            <div class="port-link-title">Mljet National Park</div>
+            <div class="port-link-type">Official Page</div>
+          </a>
+          <a href="https://visitdubrovnik.hr/destinations/lastovo/" target="_blank" class="port-link">
+            <div class="port-link-title">Lastovo</div>
+            <div class="port-link-type">Travel Info</div>
+          </a>
+          <a href="https://www.google.com/search?q=lastovo+island+images" target="_blank" class="port-link">
+            <div class="port-link-title">Lastovo Photos</div>
+            <div class="port-link-type">Images</div>
+          </a>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1.5rem; font-size: 1.3rem; color: var(--white);">7-Day Itinerary</h3>
+      <table class="itinerary-table">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Route</th>
+            <th>Distance</th>
+            <th>Time</th>
+            <th>Activity</th>
+            <th>Maps</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="day-num">1</span></td>
+            <td class="route-cell">Ploče → Korčula Town</td>
+            <td class="distance-cell">42 nm</td>
+            <td class="time-cell">6-7 hrs</td>
+            <td class="activity-cell">Open sea crossing, Marco Polo birthplace</td>
+            <td>
+              <div class="map-buttons">
+                <a href="https://www.google.com/maps/dir/Ploche/Korcsula" target="_blank" class="map-btn">🗺️ Map</a>
+                <a href="https://webapp.navionics.com/?lang=en#boating@8&key=c%7DbgH%7DscS" target="_blank" class="map-btn navionics">📊 Navionics</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="day-num">2</span></td>
+            <td class="route-cell">Korčula → Lumbarda</td>
+            <td class="distance-cell">7 nm</td>
+            <td class="time-cell">1 hr</td>
+            <td class="activity-cell">Sandy beaches, Grk wine tasting</td>
+            <td>
+              <div class="map-buttons">
+                <a href="https://www.google.com/maps/dir/Korcsula/Lumbarda" target="_blank" class="map-btn">🗺️ Map</a>
+                <a href="https://webapp.navionics.com/?lang=en#boating@8&key=c%7DbgH%7DscS" target="_blank" class="map-btn navionics">📊 Navionics</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="day-num">3</span></td>
+            <td class="route-cell">Lumbarda → Polače (Mljet)</td>
+            <td class="distance-cell">40 nm</td>
+            <td class="time-cell">6 hrs</td>
+            <td class="activity-cell">National Park, saltwater lakes, monastery</td>
+            <td>
+              <div class="map-buttons">
+                <a href="https://www.google.com/maps/dir/Lumbarda/Polace+Mljet" target="_blank" class="map-btn">🗺️ Map</a>
+                <a href="https://webapp.navionics.com/?lang=en#boating@8&key=c%7DbgH%7DscS" target="_blank" class="map-btn navionics">📊 Navionics</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="day-num">4</span></td>
+            <td class="route-cell">Polače → Lastovo</td>
+            <td class="distance-cell">28 nm</td>
+            <td class="time-cell">4-5 hrs</td>
+            <td class="activity-cell">Dark Sky Reserve, remote island, stargazing</td>
+            <td>
+              <div class="map-buttons">
+                <a href="https://www.google.com/maps/dir/Polace/Lastovo" target="_blank" class="map-btn">🗺️ Map</a>
+                <a href="https://webapp.navionics.com/?lang=en#boating@8&key=c%7DbgH%7DscS" target="_blank" class="map-btn navionics">📊 Navionics</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="day-num">5</span></td>
+            <td class="route-cell">Lastovo → Vela Luka</td>
+            <td class="distance-cell">25 nm</td>
+            <td class="time-cell">3-4 hrs</td>
+            <td class="activity-cell">Bay of Seven Fingers, Henry Moore art, food</td>
+            <td>
+              <div class="map-buttons">
+                <a href="https://www.google.com/maps/dir/Lastovo/Vela+Luka" target="_blank" class="map-btn">🗺️ Map</a>
+                <a href="https://webapp.navionics.com/?lang=en#boating@8&key=c%7DbgH%7DscS" target="_blank" class="map-btn navionics">📊 Navionics</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="day-num">6</span></td>
+            <td class="route-cell">Vela Luka → W. Korčula</td>
+            <td class="distance-cell">15 nm</td>
+            <td class="time-cell">2-3 hrs</td>
+            <td class="activity-cell">Hidden coves, snorkelling, relaxation day</td>
+            <td>
+              <div class="map-buttons">
+                <a href="https://www.google.com/maps/dir/Vela+Luka/Korcula" target="_blank" class="map-btn">🗺️ Map</a>
+                <a href="https://webapp.navionics.com/?lang=en#boating@8&key=c%7DbgH%7DscS" target="_blank" class="map-btn navionics">📊 Navionics</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="day-num">7</span></td>
+            <td class="route-cell">W. Korčula → Ploče</td>
+            <td class="distance-cell">43 nm</td>
+            <td class="time-cell">6-7 hrs</td>
+            <td class="activity-cell">Pelješac peninsula, bridge views, celebration</td>
+            <td>
+              <div class="map-buttons">
+                <a href="https://www.google.com/maps/dir/Korcula/Ploche" target="_blank" class="map-btn">🗺️ Map</a>
+                <a href="https://webapp.navionics.com/?lang=en#boating@8&key=c%7DbgH%7DscS" target="_blank" class="map-btn navionics">📊 Navionics</a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ROUTE C -->
+    <div id="route-c" class="route-content">
+      <div class="route-header">
+        <h3>Route C: Šibenik & the Kornati</h3>
+        <div class="route-meta">
+          <div class="meta-item">
+            <strong>150</strong>
+            <span>nautical miles</span>
+          </div>
+          <div class="meta-item">
+            <strong>7</strong>
+            <span>days</span>
+          </div>
+          <div class="meta-item">
+            <strong>All levels</strong>
+            <span>difficulty</span>
+          </div>
+        </div>
+        <div class="route-description">
+          UNESCO heritage, river sailing, national parks and one of the most dramatic seascapes on earth — the Kornati islands. 89 islands, islets and reefs rise from the sea like broken limestone teeth. Described by George Bernard Shaw as "the most beautiful archipelago in the world." This unique route combines river and sea sailing with spectacular natural scenery.
+        </div>
+      </div>
+
+      <div class="port-section">
+        <h3>📍 Ports & Tourism - Route C</h3>
+        <div class="port-grid">
+          <a href="https://www.sibenik-tourism.hr/" target="_blank" class="port-link">
+            <div class="port-link-title">Šibenik Tourism</div>
+            <div class="port-link-type">Official Site</div>
+          </a>
+          <a href="https://www.np-kornati.hr/index.php?lang=en" target="_blank" class="port-link">
+            <div class="port-link-title">Kornati NP</div>
+            <div class="port-link-type">Official Page</div>
+          </a>
+          <a href="https://www.np-krka.hr/" target="_blank" class="port-link">
+            <div class="port-link-title">Krka National Park</div>
+            <div class="port-link-type">Official Page</div>
+          </a>
+          <a href="https://www.skradin.hr/en/home/" target="_blank" class="port-link">
+            <div class="port-link-title">Skradin</div>
+            <div class="port-link-type">River Town</div>
+          </a>
+          <a href="https://www.tz-zlarin.hr/en/" target="_blank" class="port-link">
+            <div class="port-link-title">Zlarin Island</div>
+            <div class="port-link-type">Tourism Info</div>
+          </a>
+          <a href="https://www.google.com/search?q=kornati+park+images&sca_esv=cff2d1291cd15e94&udm=2&biw=1536&bih=695&sxsrf=ANbL-n6LapmGEe83d2qx6OhmWPDRUlEb-w%3A1774300187844&ei=G6zBad-cM_vAwPAPmtKbmAM&ved=0ahUKEwiflq-j97aTAxV7IBAIHRrpBjMQ4dUDCBI&uact=5&oq=kornati+park+images&gs_lp=Egtnd3Mtd2l6LWltZyITa29ybmF0aSBwYXJrIGltYWdlc0jCFlRgB1ioFHABeACQAQCYAUmgAdsDqgEBN7gBA8gBAPgBAZgCA6ACngHCAgYQABgHGB7CAgUQABiABMICBBAAGB7CAgYQABgFGB7CAgYQABgIGB6YAwCIBgGSBwEzoAeQB7IHATK4B5sBwgcFMC4xLjLIBwyACAE&sclient=gws-wiz-img" target="_blank" class="port-link">
+            <div class="port-link-title">Kornati Photos</div>
+            <div class="port-link-type">Images</div>
+          </a>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1.5rem; font-size: 1.3rem; color: var(--white);">7-Day Itinerary</h3>
+      <table class="itinerary-table">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Route</th>
+            <th>Distance</th>
+            <th>Time</th>
+            <th>Activity</th>
+            <th>Maps</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="day-num">1</span></td>
+            <td class="route-cell">Šibenik → Skradin (River)</td>
+            <td class="distance-cell">8 nm</td>
+            <td class="time-cell">1.5 hrs</td>
+            <td class="activity-cell">River sailing, Krka NP, waterfalls</td>
+            <td>
+              <div class="map-buttons">
+                <a href="https://www.google.com/maps/dir/Sibenik/Skradin" target="_blank" class="map-btn">🗺️ Map</a>
+                <a href="https://webapp.navionics.com/?lang=en#boating@9&key=o%7DbgH%7DscS" target="_blank" class="map-btn navionics">📊 Navionics</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="day-num">2</span></td>
+            <td class="route-cell">Skradin → Zlarin</td>
+            <td class="distance-cell">18 nm</td>
+            <td class="time-cell">2.5 hrs</td>
+            <td class="activity-cell">Coral island, car-free, peaceful village</td>
+            <td>
+              <div class="map-buttons">
+                <a href="https://www.google.com/maps/dir/Skradin/Zlarin" target="_blank" class="map-btn">🗺️ Map</a>
+                <a href="https://webapp.navionics.com/?lang=en#boating@9&key=o%7DbgH%7DscS" target="_blank" class="map-btn navionics">📊 Navionics</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="day-num">3</span></td>
+            <td class="route-cell">Zlarin → Kaprije</td>
+            <td class="distance-cell">12 nm</td>
+            <td class="time-cell">2 hrs</td>
+            <td class="activity-cell">Authentic island life, olive groves</td>
+            <td>
+              <div class="map-buttons">
+                <a href="https://www.google.com/maps/dir/Zlarin/Kaprije" target="_blank" class="map-btn">🗺️ Map</a>
+                <a href="https://webapp.navionics.com/?lang=en#boating@9&key=o%7DbgH%7DscS" target="_blank" class="map-btn navionics">📊 Navionics</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="day-num">4</span></td>
+            <td class="route-cell">Kaprije → Kornati NP</td>
+            <td class="distance-cell">20 nm</td>
+            <td class="time-cell">3-4 hrs</td>
+            <td class="activity-cell">Limestone islands, dramatic cliffs, diving</td>
+            <td>
+              <div class="map-buttons">
+                <a href="https://www.google.com/maps/dir/Kaprije/Kornati" target="_blank" class="map-btn">🗺️ Map</a>
+                <a href="https://webapp.navionics.com/?lang=en#boating@9&key=o%7DbgH%7DscS" target="_blank" class="map-btn navionics">📊 Navionics</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="day-num">5</span></td>
+            <td class="route-cell">Kornati → Telašćica NP</td>
+            <td class="distance-cell">10 nm</td>
+            <td class="time-cell">2 hrs</td>
+            <td class="activity-cell">160m cliffs, salt lake, mud therapy</td>
+            <td>
+              <div class="map-buttons">
+                <a href="https://www.google.com/maps/dir/Kornati/Telascica" target="_blank" class="map-btn">🗺️ Map</a>
+                <a href="https://webapp.navionics.com/?lang=en#boating@9&key=o%7DbgH%7DscS" target="_blank" class="map-btn navionics">📊 Navionics</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="day-num">6</span></td>
+            <td class="route-cell">Telašćica → Sali → Murter</td>
+            <td class="distance-cell">30 nm</td>
+            <td class="time-cell">4-5 hrs</td>
+            <td class="activity-cell">Fishing port, Tuna Festival, marina hub</td>
+            <td>
+              <div class="map-buttons">
+                <a href="https://www.google.com/maps/dir/Telascica/Murter" target="_blank" class="map-btn">🗺️ Map</a>
+                <a href="https://webapp.navionics.com/?lang=en#boating@9&key=o%7DbgH%7DscS" target="_blank" class="map-btn navionics">📊 Navionics</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="day-num">7</span></td>
+            <td class="route-cell">Murter → Šibenik</td>
+            <td class="distance-cell">22 nm</td>
+            <td class="time-cell">3 hrs</td>
+            <td class="activity-cell">UNESCO Cathedral, fortress, celebration</td>
+            <td>
+              <div class="map-buttons">
+                <a href="https://www.google.com/maps/dir/Murter/Sibenik" target="_blank" class="map-btn">🗺️ Map</a>
+                <a href="https://webapp.navionics.com/?lang=en#boating@9&key=o%7DbgH%7DscS" target="_blank" class="map-btn navionics">📊 Navionics</a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Tips Section -->
+<section id="tips" class="section">
+  <div class="container">
+    <h2 class="section-title">Sailing Tips</h2>
+    <p class="section-subtitle">Essential knowledge for cruising the Croatian Adriatic safely and enjoyably.</p>
+    
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon">📋</div>
+        <div class="tip-title">Documents & Permits</div>
+        <div class="tip-text">Carry ICC or national sailing cert, boat registration, and third-party insurance. Cruising permits (vignette) required at port entry. National Park fees apply to Kornati, Telašćica, Mljet and Krka.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">⚓</div>
+        <div class="tip-title">Marina Booking</div>
+        <div class="tip-text">July and August marinas fill fast. Book ACI marinas well ahead online. Always call ahead for town quays. Anchoring is free outside restricted areas — carry 50m+ of chain.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">⛽</div>
+        <div class="tip-title">Fuel & Provisioning</div>
+        <div class="tip-text">Diesel available in most larger marinas. Carry extra jerry cans for remote routes (Kornati, Lastovo). Supermarkets only in larger towns — provision thoroughly.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">📻</div>
+        <div class="tip-title">VHF Radio</div>
+        <div class="tip-text">Monitor Channel 16 at all times. Croatian MRCC uses Ch 16 & 10. Weather broadcasts on Ch 67 at 0545, 1245, 2045 local. Essential safety kit.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🌤️</div>
+        <div class="tip-title">Weather Resources</div>
+        <div class="tip-text">Use Croatian Met Service (meteo.hr), Windy.com and PredictWind for routing. Bura can appear with little warning — always check forecasts before departure.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🚢</div>
+        <div class="tip-title">Chartering</div>
+        <div class="tip-text">Charter April–October, peaking July–August. Bareboat and skippered charters available from Split, Trogir, Šibenik, Dubrovnik, Ploče. Check inventory carefully.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Resources Section -->
+<section id="resources" class="section">
+  <div class="container">
+    <h2 class="section-title">Resources & Links</h2>
+    <p class="section-subtitle">Navigation, booking, weather, and travel information for sailing Croatia.</p>
+    
+    <div class="resources-grid">
+      <div class="resource-card">
+        <div class="resource-icon">🗺️</div>
+        <div class="resource-title">Navigation Charts</div>
+        <div class="resource-desc">Professional electronic charts with depth soundings, hazard markers, and real-time updates.</div>
+        <div class="resource-links">
+          <a href="https://www.google.com/maps" target="_blank" class="resource-link">🌍 Google Maps</a>
+          <a href="https://webapp.navionics.com/" target="_blank" class="resource-link">📊 Navionics WebApp</a>
+          <a href="https://www.windy.com/" target="_blank" class="resource-link">💨 Windy.com</a>
+        </div>
+      </div>
+
+      <div class="resource-card">
+        <div class="resource-icon">⚓</div>
+        <div class="resource-title">Marina Booking</div>
+        <div class="resource-desc">Reserve berths and charter yachts across Croatian ports.</div>
+        <div class="resource-links">
+          <a href="https://www.aci-marinas.com/" target="_blank" class="resource-link">⚓ ACI Marinas</a>
+          <a href="https://www.moorings.com/" target="_blank" class="resource-link">🚢 The Moorings</a>
+          <a href="https://www.charteringcroatia.com/" target="_blank" class="resource-link">🛥️ Charter Companies</a>
+        </div>
+      </div>
+
+      <div class="resource-card">
+        <div class="resource-icon">🌤️</div>
+        <div class="resource-title">Weather & Safety</div>
+        <div class="resource-desc">Real-time forecasts and maritime safety information.</div>
+        <div class="resource-links">
+          <a href="https://www.meteo.hr/en/" target="_blank" class="resource-link">🇭🇷 Croatian Met Service</a>
+          <a href="https://www.windy.com/" target="_blank" class="resource-link">📊 Wind Data</a>
+          <a href="https://www.predictwind.com/" target="_blank" class="resource-link">⛵ Routing Forecasts</a>
+        </div>
+      </div>
+
+      <div class="resource-card">
+        <div class="resource-icon">📸</div>
+        <div class="resource-title">Photos & Gallery</div>
+        <div class="resource-desc">Stunning sailing and destination photography.</div>
+        <div class="resource-links">
+          <a href="https://www.flickr.com/search/?q=Croatia+sailing" target="_blank" class="resource-link">📷 Flickr Croatia</a>
+          <a href="https://www.instagram.com/explore/tags/croatiasailing/" target="_blank" class="resource-link">📱 Instagram Sailing</a>
+          <a href="https://unsplash.com/nquery/croatia" target="_blank" class="resource-link">🖼️ Unsplash Croatia</a>
+        </div>
+      </div>
+
+      <div class="resource-card">
+        <div class="resource-icon">🏛️</div>
+        <div class="resource-title">Tourism & Culture</div>
+        <div class="resource-desc">Official tourism boards and cultural information.</div>
+        <div class="resource-links">
+          <a href="https://www.dalmatia.hr/" target="_blank" class="resource-link">🏛️ Dalmatia Tourism</a>
+          <a href="https://www.croatia.hr/" target="_blank" class="resource-link">🇭🇷 Croatia Official</a>
+          <a href="https://www.visitcroatia.co.uk/" target="_blank" class="resource-link">🌍 Visit Croatia</a>
+        </div>
+      </div>
+
+      <div class="resource-card">
+        <div class="resource-icon">🧭</div>
+        <div class="resource-title">Additional Info</div>
+        <div class="resource-desc">Extra sailing guides and travel resources.</div>
+        <div class="resource-links">
+          <a href="https://www.sailcroatia.com/" target="_blank" class="resource-link">⛵ Sail Croatia</a>
+          <a href="https://www.adriatic.hr/" target="_blank" class="resource-link">🌊 Adriatic Guide</a>
+          <a href="https://www.marinas.hr/" target="_blank" class="resource-link">🛥️ Marina Finder</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-grid">
+      <div class="footer-section">
+        <h4>Sailing Routes</h4>
+        <a href="#routes">Route A — Kaštela to Vis</a>
+        <a href="#routes">Route B — Ploče to Lastovo</a>
+        <a href="#routes">Route C — Šibenik & Kornati</a>
+      </div>
+      <div class="footer-section">
+        <h4>Information</h4>
+        <a href="#weather">Best Time to Sail</a>
+        <a href="#tips">Sailing Tips</a>
+        <a href="#resources">Resources</a>
+      </div>
+      <div class="footer-section">
+        <h4>Official Links</h4>
+        <a href="https://www.croatia.hr/">Croatian Tourism</a>
+        <a href="https://www.dalmatia.hr/">Dalmatian Coast</a>
+        <a href="https://www.aci-marinas.com/">ACI Marinas</a>
+      </div>
+      <div class="footer-section">
+        <h4>Weather & Charts</h4>
+        <a href="https://www.meteo.hr/">Croatian Met Service</a>
+        <a href="https://www.windy.com/">Windy Forecasts</a>
+        <a href="https://www.google.com/maps">Google Maps</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>⛵ Sailing Croatia — Three 7-day routes through the Adriatic. Always sail safely and check weather forecasts before departure.</p>
+      <p>Distances are approximate. Consult official charts and forecasts. © 2024</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function showRoute(routeId) {
+    // Hide all route contents
+    const routeContents = document.querySelectorAll('.route-content');
+    routeContents.forEach(content => {
+      content.classList.remove('active');
+    });
+
+    // Remove active class from all tabs
+    const tabs = document.querySelectorAll('.route-tab');
+    tabs.forEach(tab => {
+      tab.classList.remove('active');
+    });
+
+    // Show selected route
+    document.getElementById(routeId).classList.add('active');
+
+    // Add active class to clicked tab
+    event.target.classList.add('active');
+
+    // Scroll to routes section
+    document.getElementById('routes').scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
